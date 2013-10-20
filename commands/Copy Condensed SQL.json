@@ -1,0 +1,13 @@
+{
+  "beforeRunningCommand": "nop",
+  "command": "#!/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby\n\nres = STDIN.read\n\n# Remove extraneous scope xml\nres.gsub!(/<(?!\\/?(string|comment)\\.)[^>]*>/, '')\n\n# Remove comments\nres.gsub!(/<comment\\.[^>]*>[^<]*?<\\/comment\\.[^>]*>/, '')\n\n# Compact whitespace, leaving strings alone\nres.gsub!(/(?:([^<]+)|(<string\\.[^>]*>[^<]*?<\\/string\\.[^>]*>))/) {\n  if $1\n    out = $1\n    out = out.gsub(/\\n/, ' ')\n    out = out.gsub(/\\s{2,}/, ' ')\n  elsif $2\n    $2\n  end\n}\n\n# Remove string tags\nres.gsub!(/<\\/?string\\.[^>]*>/, '')\n\n# Un-encode entities\nres.gsub!(/&amp;/, '&')\nres.gsub!(/&lt;/,  '<')\n\nIO.popen('pbcopy', 'w') { |io| io << res }\n\nputs \"Copied SQL to Clipboard\"\n",
+  "input": "selection",
+  "inputFormat": "xml",
+  "keyEquivalent": "~@C",
+  "name": "Copy Condensed SQL",
+  "outputCaret": "afterOutput",
+  "outputFormat": "text",
+  "outputLocation": "toolTip",
+  "scope": "source.sql",
+  "version": 2
+}

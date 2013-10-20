@@ -1,0 +1,8 @@
+{
+  "name": "Symbol List: Function",
+  "scope": "source.sql meta.create.sql, source.sql meta.drop.sql, source.sql meta.alter.sql",
+  "settings": {
+    "showInSymbolList": 1,
+    "symbolTransformation": "s/^\\s*(\\w+[\\w\\s]+\\w+)\\s*/$1/"
+  }
+}

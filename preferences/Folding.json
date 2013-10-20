@@ -1,0 +1,8 @@
+{
+  "name": "Folding",
+  "scope": "source.sql",
+  "settings": {
+    "foldingStartMarker": "\\s*\\(\\s*$",
+    "foldingStopMarker": "^\\s*\\)"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "beforeRunningCommand": "nop",
+  "keyEquivalent": "~@,",
+  "command": "configure.sh",
+  "input": "none",
+  "name": "Preferences…",
+  "output": "discard",
+  "scope": "source.sql"
+}

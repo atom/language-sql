@@ -1,0 +1,9 @@
+{
+  "beforeRunningCommand": "nop",
+  "command": "\"$TM_BUNDLE_SUPPORT/bin/completion.rb\"",
+  "input": "none",
+  "keyEquivalent": "~\u001b",
+  "name": "Completion",
+  "output": "afterSelectedText",
+  "scope": "source.sql"
+}

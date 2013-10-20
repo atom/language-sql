@@ -1,0 +1,14 @@
+{
+  "beforeRunningCommand": "nop",
+  "command": "#!/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby -wKU\n\nrequire ENV['TM_BUNDLE_SUPPORT'] + '/bin/db_browser_lib.rb'\n\noptions = OpenStruct.new\nget_connection_settings(options)\n\nif options.server == 'mysql'\n  url = \"http://dev.mysql.com/#{ENV['TM_CURRENT_WORD'].downcase}\"\nelsif options.server == 'postgresql'\n  url = \"http://www.postgresql.org/docs/current/static/sql-#{ENV['TM_CURRENT_WORD'].downcase}.html\"\n  if `curl --silent -I \"#{url}\" | grep '200 OK'`.empty?\n    url = \"http://search.postgresql.org/search?q=#{ENV['TM_CURRENT_WORD'].downcase}\"\n  end\nend\nputs \"<script>window.location='#{url}'</script>\"",
+  "input": "none",
+  "inputFormat": "text",
+  "keyEquivalent": "^h",
+  "name": "Documentation for Current Word",
+  "outputCaret": "afterOutput",
+  "outputFormat": "html",
+  "outputLocation": "newWindow",
+  "scope": "source.sql",
+  "semanticClass": "lookup.define.sql",
+  "version": 2
+}
