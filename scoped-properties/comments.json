@@ -1,0 +1,7 @@
+{
+  "source.sql": {
+    "editor": {
+      "commentStart": "-- "
+    }
+  }
+}

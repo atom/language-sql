@@ -1,8 +1,0 @@
-{
-  "name": "Miscellaneous",
-  "scope": "source.sql",
-  "settings": {
-    "decreaseIndentPattern": "\\)(?!=.*\\()",
-    "increaseIndentPattern": "^\\s*(create|grant|insert|delete|update)\\b|\\((?!.*\\))"
-  }
-}
