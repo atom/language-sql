@@ -1,8 +1,0 @@
-{
-  ".source.sql": {
-    "editor": {
-      "increaseIndentPattern": "^\\s*(create|grant|insert|delete|update)\\b|\\((?!.*\\))",
-      "decreaseIndentPattern": "\\)(?!=.*\\()"
-    }
-  }
-}
