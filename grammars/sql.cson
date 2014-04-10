@@ -1,3 +1,4 @@
+'scopeName': 'source.sql'
 'fileTypes': [
   'sql'
   'ddl'
@@ -365,4 +366,3 @@
         ]
       }
     ]
-'scopeName': 'source.sql'
