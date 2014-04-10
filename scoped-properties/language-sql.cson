@@ -3,4 +3,4 @@
     'commentStart': '-- '
     'foldEndPattern': '^\\s*\\)'
     'increaseIndentPattern': '^\\s*(create|grant|insert|delete|update)\\b|\\((?!.*\\))'
-    'decreaseIndentPattern': '\\)(?!=.*\\()'
+    'decreaseIndentPattern': '^\\s*\\)(?!=.*\\()'
