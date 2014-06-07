@@ -183,7 +183,7 @@
   }
   {
     'match': '(?i)\\b(bigint|binary|bit|blob|bool|boolean|char|curve|date|datetime|dec|decimal|double|enum|fixed|float|geometry|geometrycollection|int|integer|line|linearring|linestring|longblob|longtext|mediumblob|mediumint|mediumtext|multicurve|multilinestring|multipoint|multipolygon|multisurface|national|numeric|point|polygon|precision|real|smallint|surface|text|time|timestamp|tinyblob|tinyint|tinytext|unsigned|varchar|year|year2|year4|zerofill)\\b'
-    'name': 'type.sql.mysql'
+    'name': 'storage.type.sql.mysql'
   }
 ]
 'repository':
