@@ -1,9 +1,3 @@
-# SQL language support in Atom
+# MySQL keyword highlight support to Atom SQL language module
 
-Adds syntax highlighting to SQL files in Atom.
-
-Originally [converted](http://atom.io/docs/latest/converting-a-text-mate-bundle)
-from the [SQL TextMate bundle](https://github.com/textmate/sql.tmbundle).
-
-Contributions are greatly appreciated. Please fork this repository and open a
-pull request to add snippets, make grammar tweaks, etc.
+This package is fork of [Atom's SQL language module](https://github.com/atom/language-sql), and add a feature to highlight MySQL keywords.
