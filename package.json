@@ -1,7 +1,7 @@
 {
   "name": "language-sql-mysql",
   "version": "0.1.0",
-  "description": "SQL language support in Atom (with highlight MySQL keyword)",
+  "description": "Add MySQL keyword highlight to Atom's sql module",
   "engines": {
     "atom": "*",
     "node": "*"
