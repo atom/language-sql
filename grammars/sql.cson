@@ -3,6 +3,7 @@
   'sql'
   'ddl'
   'dml'
+  'pgsql'
 ]
 'name': 'SQL'
 'patterns': [
