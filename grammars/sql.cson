@@ -1,11 +1,11 @@
 'scopeName': 'source.sql'
+'name': 'SQL'
 'fileTypes': [
   'sql'
   'ddl'
   'dml'
   'pgsql'
 ]
-'name': 'SQL'
 'patterns': [
   {
     'include': '#comments'
