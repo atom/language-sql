@@ -49,6 +49,19 @@
         'name': 'keyword.other.create.sql'
       '2':
         'name': 'keyword.other.table.sql'
+      '3':
+        'name': 'entity.name.function.sql'
+      '4':
+        'name': 'keyword.other.cascade.sql'
+    'match': '(?i:\\s*(truncate)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)'
+    'name': 'meta.truncate.sql'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'keyword.other.create.sql'
+      '2':
+        'name': 'keyword.other.table.sql'
     'match': '(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)'
     'name': 'meta.alter.sql'
   }
@@ -115,7 +128,7 @@
     'name': 'keyword.other.authorization.sql'
   }
   {
-    'match': '(?i:\\bin\\b)'
+    'match': '(?i:(\\bnot\\s+)?\\bin\\b)'
     'name': 'keyword.other.data-integrity.sql'
   }
   {
