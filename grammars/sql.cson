@@ -144,6 +144,10 @@
     'name': 'keyword.other.order.sql'
   }
   {
+    'match': '(?i)\\b(case|when|then|else|end)\\b'
+    'name': 'keyword.other.case.sql'
+  }
+  {
     'match': '\\*'
     'name': 'keyword.operator.star.sql'
   }
