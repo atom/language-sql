@@ -1,6 +1,6 @@
 {
   "name": "language-sql",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "SQL language support in Atom",
   "engines": {
     "atom": "*",
