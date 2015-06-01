@@ -112,7 +112,7 @@
     'name': 'keyword.other.DML.sql'
   }
   {
-    'match': '(?i:\\b(on|((is\\s+)?not\\s+)?null)\\b)'
+    'match': '(?i:\\b(on|(is\\s+)?(not\\s+)?null)\\b)'
     'name': 'keyword.other.DDL.create.II.sql'
   }
   {
