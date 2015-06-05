@@ -213,23 +213,6 @@
         ]
       }
       {
-        'begin': '(^[ \\t]+)?(?=#)'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.whitespace.comment.leading.sql'
-        'end': '(?!\\G)'
-        'patterns': [
-          {
-            'begin': '#'
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.definition.comment.sql'
-            'end': '\\n'
-            'name': 'comment.line.number-sign.sql'
-          }
-        ]
-      }
-      {
         'begin': '/\\*'
         'captures':
           '0':
