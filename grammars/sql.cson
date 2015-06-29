@@ -62,7 +62,9 @@
         'name': 'keyword.other.create.sql'
       '2':
         'name': 'keyword.other.table.sql'
-    'match': '(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)'
+      '4':
+        'name': 'entity.name.function.sql'
+    'match': '(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+([\'"`]?)(\\w+)\\3)'
     'name': 'meta.alter.sql'
   }
   {
@@ -97,7 +99,7 @@
         'name': 'constant.numeric.sql'
       '15':
         'name': 'storage.type.sql'
-    'match': '(?xi)\n\n\t\t\t\t# normal stuff, capture 1\n\t\t\t\t \\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|enum|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b\n\n\t\t\t\t# numeric suffix, capture 2 + 3i\n\t\t\t\t|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)\n\n\t\t\t\t# optional numeric suffix, capture 4 + 5i\n\t\t\t\t|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?\n\n\t\t\t\t# special case, capture 6 + 7i + 8i\n\t\t\t\t|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?\n\n\t\t\t\t# special case, captures 9, 10i, 11\n\t\t\t\t|\\b(times)(?:\\((\\d+)\\))(\\swithoutstimeszone\\b)?\n\n\t\t\t\t# special case, captures 12, 13, 14i, 15\n\t\t\t\t|\\b(timestamp|time)\\b(?:(s)\\((\\d+)\\)(\\swithoutstimeszone\\b)?)?\n\n\t\t\t'
+    'match': '(?xi)\n\n\t\t\t\t# normal stuff, capture 1\n\t\t\t\t \\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|datetime|double\\sprecision|enum|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b\n\n\t\t\t\t# numeric suffix, capture 2 + 3i\n\t\t\t\t|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)\n\n\t\t\t\t# optional numeric suffix, capture 4 + 5i\n\t\t\t\t|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?\n\n\t\t\t\t# special case, capture 6 + 7i + 8i\n\t\t\t\t|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?\n\n\t\t\t\t# special case, captures 9, 10i, 11\n\t\t\t\t|\\b(times)(?:\\((\\d+)\\))(\\swithoutstimeszone\\b)?\n\n\t\t\t\t# special case, captures 12, 13, 14i, 15\n\t\t\t\t|\\b(timestamp|time)\\b(?:(s)\\((\\d+)\\)(\\swithoutstimeszone\\b)?)?\n\n\t\t\t'
   }
   {
     'match': '(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|check|constraint)\\b)'
@@ -112,7 +114,7 @@
     'name': 'keyword.other.DML.sql'
   }
   {
-    'match': '(?i:\\b(on|(is\\s+)?(not\\s+)?null)\\b)'
+    'match': '(?i:\\b(on|(is\\s+)?(not\\s+)?null|auto_increment)\\b)'
     'name': 'keyword.other.DDL.create.II.sql'
   }
   {
