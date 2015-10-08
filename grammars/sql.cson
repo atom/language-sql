@@ -295,7 +295,7 @@
         'captures':
           '1':
             'name': 'punctuation.definition.string.begin.sql'
-          '3':
+          '2':
             'name': 'punctuation.definition.string.end.sql'
         'comment': 'this is faster than the next begin/end rule since sub-pattern will match till end-of-line and SQL files tend to have very long lines.'
         'match': '(\')[^\'\\\\]*(\')'
@@ -319,9 +319,9 @@
       }
       {
         'captures':
-          '1':
+          '0':
             'name': 'punctuation.definition.string.begin.sql'
-          '3':
+          '1':
             'name': 'punctuation.definition.string.end.sql'
         'comment': 'this is faster than the next begin/end rule since sub-pattern will match till end-of-line and SQL files tend to have very long lines.'
         'match': '(`)[^`\\\\]*(`)'
@@ -347,7 +347,7 @@
         'captures':
           '1':
             'name': 'punctuation.definition.string.begin.sql'
-          '3':
+          '2':
             'name': 'punctuation.definition.string.end.sql'
         'comment': 'this is faster than the next begin/end rule since sub-pattern will match till end-of-line and SQL files tend to have very long lines.'
         'match': '(")[^"#]*(")'
