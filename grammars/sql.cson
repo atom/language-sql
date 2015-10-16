@@ -134,6 +134,10 @@
     'name': 'keyword.other.data-integrity.sql'
   }
   {
+    'match': '(?i:\\bnot\\b)'
+    'name': 'keyword.other.not.sql'
+  }
+  {
     'match': '(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)'
     'name': 'keyword.other.object-comments.sql'
   }
