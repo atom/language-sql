@@ -110,7 +110,7 @@
     'name': 'constant.numeric.sql'
   }
   {
-    'match': '(?i:\\b(select(\\s+distinct)?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|offset|(inner|cross)\\s+join|join|straight_join|(left|right)(\\s+outer)?\\s+join|natural(\\s+(left|right)(\\s+outer)?)?\\s+join|using|(not\\s+)?(regexp|rlike))\\b)'
+    'match': '(?i:\\b(select(\\s+distinct)?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|offset|(inner|cross)\\s+join|join|straight_join|(left|right)(\\s+outer)?\\s+join|natural(\\s+(left|right)(\\s+outer)?)?\\s+join|using|regexp|rlike)\\b)'
     'name': 'keyword.other.DML.sql'
   }
   {
@@ -132,6 +132,10 @@
   {
     'match': '(?i:(\\bnot\\s+)?\\bin\\b)'
     'name': 'keyword.other.data-integrity.sql'
+  }
+  {
+    'match': '(?i:\\bnot\\b)'
+    'name': 'keyword.other.not.sql'
   }
   {
     'match': '(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)'
