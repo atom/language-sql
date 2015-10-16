@@ -14,8 +14,8 @@ describe "SQL grammar", ->
     
   it 'tokenizes integers', ->
     {tokens} = grammar.tokenizeLine('12345')
-    expect(tokens[0]).toEqual value: '12345', scopes: ['constant.numeric.sql']
-  
+    expect(tokens[0]).toEqual value: '12345', scopes: ['source.sql', 'constant.numeric.sql']
+    
   it 'tokenizes decimal numbers', ->
     {tokens} = grammar.tokenizeLine('123.45')
-    expect(tokens[0]).toEqual value: '123.45', scopes: ['constant.numeric.sql']
+    expect(tokens[0]).toEqual value: '123.45', scopes: ['source.sql', 'constant.numeric.sql']
