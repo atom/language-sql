@@ -23,3 +23,11 @@ describe "SQL grammar", ->
   it 'tokenizes decimal numbers', ->
     {tokens} = grammar.tokenizeLine('123.45')
     expect(tokens[0]).toEqual value: '123.45', scopes: ['source.sql', 'constant.numeric.sql']
+
+  it 'tokenizes weird numbers', ->
+    {tokens} = grammar.tokenizeLine('123.')
+    expect(tokens[0]).toEqual value: '123.', scopes: ['source.sql', 'constant.numeric.sql']
+
+  it 'tokenizes weird numbers', ->
+    {tokens} = grammar.tokenizeLine('.123')
+    expect(tokens[0]).toEqual value: '.123', scopes: ['source.sql', 'constant.numeric.sql']
