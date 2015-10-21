@@ -106,7 +106,7 @@
     'name': 'storage.modifier.sql'
   }
   {
-    'match': '\\b(\\d+)|(\\.\\d+)|(\\d+\\.)|(\\d+\\.\\d+)\\b'
+    'match': '\\b(\\d+\\.\\d+)|(\\d+\\.)|(\\.\\d+)|(\\d+)\\b'
     'name': 'constant.numeric.sql'
   }
   {
