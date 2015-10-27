@@ -32,11 +32,7 @@ describe "SQL grammar", ->
 
   it "quotes strings", ->
     {tokens} = grammar.tokenizeLine('"Test"')
-    expect(tokens[0]).toEqual value: '"', scopes: ['source.sql', 'punctuation.definition.string.begin.sql']
-    expect(tokens[1]).toEqual value: 'Test', scopes: ['source.sql', 'string.quoted.single.sql']
-    expect(tokens[3]).toEqual value: '"', scopes: ['source.sql', 'punctuation.definition.string.end.sql']
-
-    {tokens} = grammar.tokenizeLine('"Te\\"st"')
-    expect(tokens[0]).toEqual value: '"', scopes: ['source.sql', 'punctuation.definition.string.begin.sql']
-    expect(tokens[1]).toEqual value: 'Te"st', scopes: ['source.sql', 'string.quoted.single.sql']
-    expect(tokens[3]).toEqual value: '"', scopes: ['source.sql', 'punctuation.definition.string.end.sql']
+    expect(tokens[0]).toEqual value: '"', scopes: ['source.sql', 'string.quoted.double.sql', 'punctuation.definition.string.begin.sql']
+    expect(tokens[1]).toEqual value: 'Test', scopes: ['source.sql', 'string.quoted.double.sql']
+    expect(tokens[2]).toEqual value: '"', scopes: ['source.sql', 'string.quoted.double.sql', 'punctuation.definition.string.end.sql']
+    
