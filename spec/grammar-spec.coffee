@@ -29,3 +29,10 @@ describe "SQL grammar", ->
 
     {tokens} = grammar.tokenizeLine('.123')
     expect(tokens[0]).toEqual value: '.123', scopes: ['source.sql', 'constant.numeric.sql']
+
+  it "quotes strings", ->
+    {tokens} = grammar.tokenizeLine('"Test"')
+    expect(tokens[0]).toEqual value: '"', scopes: ['source.sql', 'string.quoted.double.sql', 'punctuation.definition.string.begin.sql']
+    expect(tokens[1]).toEqual value: 'Test', scopes: ['source.sql', 'string.quoted.double.sql']
+    expect(tokens[2]).toEqual value: '"', scopes: ['source.sql', 'string.quoted.double.sql', 'punctuation.definition.string.end.sql']
+    
