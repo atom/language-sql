@@ -99,7 +99,8 @@
         'name': 'constant.numeric.sql'
       '15':
         'name': 'storage.type.sql'
-    'match': '(?xi)
+    'match': '''
+              (?xi)
               # normal stuff, capture 1
               \\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|datetime|double\\sprecision|enum|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b
 
@@ -116,7 +117,8 @@
               |\\b(times)(?:\\((\\d+)\\))(\\swithoutstimeszone\\b)?
 
               # special case, captures 12, 13, 14i, 15
-              |\\b(timestamp|time)\\b(?:(s)\\((\\d+)\\)(\\swithoutstimeszone\\b)?)?'
+              |\\b(timestamp|time)\\b(?:(s)\\((\\d+)\\)(\\swithoutstimeszone\\b)?)?
+            '''
   }
   {
     'match': '(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|check|constraint)\\b)'
