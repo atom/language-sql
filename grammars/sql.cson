@@ -99,7 +99,26 @@
         'name': 'constant.numeric.sql'
       '15':
         'name': 'storage.type.sql'
-    'match': '(?xi)\n\n\t\t\t\t# normal stuff, capture 1\n\t\t\t\t \\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|datetime|double\\sprecision|enum|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b\n\n\t\t\t\t# numeric suffix, capture 2 + 3i\n\t\t\t\t|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)\n\n\t\t\t\t# optional numeric suffix, capture 4 + 5i\n\t\t\t\t|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?\n\n\t\t\t\t# special case, capture 6 + 7i + 8i\n\t\t\t\t|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?\n\n\t\t\t\t# special case, captures 9, 10i, 11\n\t\t\t\t|\\b(times)(?:\\((\\d+)\\))(\\swithoutstimeszone\\b)?\n\n\t\t\t\t# special case, captures 12, 13, 14i, 15\n\t\t\t\t|\\b(timestamp|time)\\b(?:(s)\\((\\d+)\\)(\\swithoutstimeszone\\b)?)?\n\n\t\t\t'
+    'match': '''
+              (?xi)
+              # normal stuff, capture 1
+              \\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|datetime|double\\sprecision|enum|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b
+
+              # numeric suffix, capture 2 + 3i
+              |\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)
+
+              # optional numeric suffix, capture 4 + 5i
+              |\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?
+
+              # special case, capture 6 + 7i + 8i
+              |\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?
+
+              # special case, captures 9, 10i, 11
+              |\\b(times)(?:\\((\\d+)\\))(\\swithoutstimeszone\\b)?
+
+              # special case, captures 12, 13, 14i, 15
+              |\\b(timestamp|time)\\b(?:(s)\\((\\d+)\\)(\\swithoutstimeszone\\b)?)?
+            '''
   }
   {
     'match': '(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|check|constraint)\\b)'
