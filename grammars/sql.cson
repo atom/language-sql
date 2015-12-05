@@ -4,6 +4,7 @@
   'ddl'
   'dml'
   'pgsql'
+  'psql'
   'sql'
 ]
 'patterns': [
