@@ -28,8 +28,17 @@
         'name': 'keyword.other.create.sql'
       '2':
         'name': 'keyword.other.sql'
-    'match': '(?i:^\\s*(drop)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view))'
+    'match': '(?i:^\\s*(drop)\\s+(aggregate|check|constraint|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view))'
     'name': 'meta.drop.sql'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'keyword.other.create.sql'
+      '2':
+        'name': 'keyword.other.sql'
+    'match': '(?i:^\\s*(add)\\s+(check|constraint|(?:foreign|primary)\\s+key))'
+    'name': 'meta.add.sql'
   }
   {
     'captures':
