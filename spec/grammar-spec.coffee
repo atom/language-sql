@@ -20,6 +20,19 @@ describe "SQL grammar", ->
     {tokens} = grammar.tokenizeLine('12345')
     expect(tokens[0]).toEqual value: '12345', scopes: ['source.sql', 'constant.numeric.sql']
 
+  it 'tokenizes integers ending words', ->
+    {tokens} = grammar.tokenizeLine('field1')
+    expect(tokens[0]).toEqual value: 'field1', scopes: ['source.sql']
+
+    {tokens} = grammar.tokenizeLine('2field')
+    expect(tokens[0]).toEqual value: '2field', scopes: ['source.sql']
+
+    {tokens} = grammar.tokenizeLine('link_from_1_to_2')
+    expect(tokens[0]).toEqual value: 'link_from_1_to_2', scopes: ['source.sql']
+
+    {tokens} = grammar.tokenizeLine('create table t1')
+    expect(tokens[4]).toEqual value: 't1', scopes: ['source.sql', 'meta.create.sql', 'entity.name.function.sql']
+
   it 'tokenizes numbers with decimals in them', ->
     {tokens} = grammar.tokenizeLine('123.45')
     expect(tokens[0]).toEqual value: '123.45', scopes: ['source.sql', 'constant.numeric.sql']
