@@ -3,10 +3,10 @@
 'fileTypes': [
   'ddl'
   'dml'
+  'dsql'
   'pgsql'
   'psql'
   'sql'
-  'dsql'
 ]
 'patterns': [
   {
