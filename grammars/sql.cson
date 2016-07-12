@@ -147,7 +147,7 @@
     'name': 'keyword.other.DDL.create.II.sql'
   }
   {
-    'match': '(?i:\\b(values|use|exec|openquery)\\b)'
+    'match': '(?i:\\b(values|use|go|into|exec|openquery)\\b)'
     'name': 'keyword.other.DML.II.sql'
   }
   {
