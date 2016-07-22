@@ -51,6 +51,10 @@ describe "SQL grammar", ->
     {tokens} = grammar.tokenizeLine('DROP CONSTRAINT')
     expect(tokens[0]).toEqual value: 'DROP', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.create.sql']
 
+  it 'tokenizes with', ->
+    {tokens} = grammar.tokenizeLine('WITH field')
+    expect(tokens[0]).toEqual value: 'WITH', scopes: ['source.sql', 'keyword.other.DML.sql']
+
   it "quotes strings", ->
     {tokens} = grammar.tokenizeLine('"Test"')
     expect(tokens[0]).toEqual value: '"', scopes: ['source.sql', 'string.quoted.double.sql', 'punctuation.definition.string.begin.sql']
