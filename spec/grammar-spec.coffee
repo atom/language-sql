@@ -53,7 +53,7 @@ describe "SQL grammar", ->
 
   it 'tokenizes with', ->
     {tokens} = grammar.tokenizeLine('WITH field')
-    expert(tokens[0]).toEqual value: 'WITH', scopes: ['source.sql', 'keyword.other.DML.sql']
+    expect(tokens[0]).toEqual value: 'WITH', scopes: ['source.sql', 'keyword.other.DML.sql']
 
   it "quotes strings", ->
     {tokens} = grammar.tokenizeLine('"Test"')
