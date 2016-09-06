@@ -201,7 +201,7 @@
   }
   {
     'comment': 'List of SQL99 built-in functions from http://www.oreilly.com/catalog/sqlnut/chapter/ch04.html'
-    'match': '(?i)\\b(CURRENT_(DATE|TIME(STAMP)?|USER)|(SESSION|SYSTEM)_USER)\\b'
+    'match': '(?i)\\b(CURRENT_(DATE|TIME(STAMP)?|USER)|(SESSION|SYSTEM)_USER|EXTRACT)\\b'
     'name': 'support.function.scalar.sql'
   }
   {
