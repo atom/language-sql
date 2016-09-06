@@ -205,6 +205,10 @@
     'name': 'support.function.scalar.sql'
   }
   {
+    'match': '(?i)\\b(ABS|ACOS|ASIN|ATAN|ATAN2|CEIL|CEILING|CONV|COS|COT|CRC32|DEGREES|EXP|FLOOR|LN|LOG|LOG10|LOG2|MOD|PI|POW|POWER|RADIANS|RAND|ROUND|SIGN|SIN|SQRT|TAN|TRUNCATE)\\b'
+    'name': 'support.function.math.sql'
+  }
+  {
     'comment': 'List of SQL99 built-in functions from http://www.oreilly.com/catalog/sqlnut/chapter/ch04.html'
     'match': '(?i)\\b(AVG|COUNT|MIN|MAX|SUM)(?=\\s*\\()'
     'name': 'support.function.aggregate.sql'
