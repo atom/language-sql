@@ -140,7 +140,7 @@
     'name': 'constant.numeric.sql'
   }
   {
-    'match': '(?i:\\b(select(\\s+distinct)?|insert\\s+(ignore\\s+)?into|update|delete|from|use|declare|set|where|group\\s+by|or|like|between|and|(union|except)(\\s+all)?|having|order\\s+by|limit|offset|(inner|cross)\\s+join|join|straight_join|(left|right)(\\s+outer)?\\s+join|natural(\\s+(left|right)(\\s+outer)?)?\\s+join|using|regexp|rlike|with|exists)\\b)'
+    'match': '(?i:\\b(select(\\s+distinct)?|insert\\s+(ignore\\s+)?into|update|delete|from|use|declare|set|where|group\\s+by|or|like|between|and|(union|except)(\\s+all)?|having|order\\s+by|partition\\s+by|limit|offset|(inner|cross)\\s+join|join|straight_join|(left|right)(\\s+outer)?\\s+join|natural(\\s+(left|right)(\\s+outer)?)?\\s+join|using|regexp|rlike|with|exists)\\b)'
     'name': 'keyword.other.DML.sql'
   }
   {
@@ -218,7 +218,7 @@
     'name': 'support.function.string.sql'
   }
   {
-    'match': '(?i)\\b(ROW_NUMBER|RANK|DENSE_RANK|PERCENT_RANK|CUME_DIST|NTILE|LAG|LEAD|FIRST_VALUE|LAST_VALUE|NTH_VALUE|PARTITION|OVER)\\b'
+    'match': '(?i)\\b(ROW_NUMBER|RANK|DENSE_RANK|PERCENT_RANK|CUME_DIST|NTILE|LAG|LEAD|FIRST_VALUE|LAST_VALUE|NTH_VALUE|OVER)\\b'
     'name': 'support.function.window.sql'
   }
   {
