@@ -218,6 +218,10 @@
     'name': 'support.function.string.sql'
   }
   {
+    'match': '(?i)\\b(ROW_NUMBER|RANK|DENSE_RANK|PERCENT_RANK|CUME_DIST|NTILE|LAG|LEAD|FIRST_VALUE|LAST_VALUE|NTH_VALUE)\\b'
+    'name': 'support.function.window.sql'
+  }
+  {
     'captures':
       '1':
         'name': 'constant.other.database-name.sql'
