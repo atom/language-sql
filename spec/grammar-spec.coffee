@@ -57,11 +57,11 @@ describe "SQL grammar", ->
 
   it 'tokenizes math functions', ->
     {tokens} = grammar.tokenizeLine('SELECT ABS(-4)')
-    expect(tokens[1]).toEqual value: 'ABS', scopes: ['source.sql', 'support.function.math.sql']
+    expect(tokens[2]).toEqual value: 'ABS', scopes: ['source.sql', 'support.function.math.sql']
 
   it 'tokenizes window functions', ->
     {tokens} = grammar.tokenizeLine('SELECT ROW_NUMBER()')
-    expect(tokens[1]).toEqual value: 'ROW_NUMBER', scopes: ['source.sql', 'support.function.window.sql']
+    expect(tokens[2]).toEqual value: 'ROW_NUMBER', scopes: ['source.sql', 'support.function.window.sql']
 
   it "quotes strings", ->
     {tokens} = grammar.tokenizeLine('"Test"')
