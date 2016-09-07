@@ -140,7 +140,7 @@
     'name': 'constant.numeric.sql'
   }
   {
-    'match': '(?i:\\b(select(\\s+distinct)?|insert\\s+(ignore\\s+)?into|update|delete|from|use|declare|set|where|group\\s+by|or|like|between|and|(union|except)(\\s+all)?|having|order\\s+by|limit|offset|(inner|cross)\\s+join|join|straight_join|(left|right)(\\s+outer)?\\s+join|natural(\\s+(left|right)(\\s+outer)?)?\\s+join|using|regexp|rlike|with|exists)\\b)'
+    'match': '(?i:\\b(select(\\s+distinct)?|insert\\s+(ignore\\s+)?into|update|delete|from|use|declare|set|where|group\\s+by|or|like|between|and|(union|except)(\\s+all)?|having|order\\s+by|partition\\s+by|limit|offset|(inner|cross)\\s+join|join|straight_join|(left|right)(\\s+outer)?\\s+join|natural(\\s+(left|right)(\\s+outer)?)?\\s+join|using|regexp|rlike|with|exists)\\b)'
     'name': 'keyword.other.DML.sql'
   }
   {
@@ -201,8 +201,12 @@
   }
   {
     'comment': 'List of SQL99 built-in functions from http://www.oreilly.com/catalog/sqlnut/chapter/ch04.html'
-    'match': '(?i)\\b(CURRENT_(DATE|TIME(STAMP)?|USER)|(SESSION|SYSTEM)_USER)\\b'
+    'match': '(?i)\\b(CURRENT_(DATE|TIME(STAMP)?|USER)|(SESSION|SYSTEM)_USER|EXTRACT)\\b'
     'name': 'support.function.scalar.sql'
+  }
+  {
+    'match': '(?i)\\b(ABS|ACOS|ASIN|ATAN|ATAN2|CEIL|CEILING|CONV|COS|COT|CRC32|DEGREES|EXP|FLOOR|LN|LOG|LOG10|LOG2|MOD|PI|POW|POWER|RADIANS|RAND|ROUND|SIGN|SIN|SQRT|TAN|TRUNCATE)\\b'
+    'name': 'support.function.math.sql'
   }
   {
     'comment': 'List of SQL99 built-in functions from http://www.oreilly.com/catalog/sqlnut/chapter/ch04.html'
@@ -212,6 +216,10 @@
   {
     'match': '(?i)\\b(CONCATENATE|CONVERT|LOWER|SUBSTRING|TRANSLATE|TRIM|UPPER)\\b'
     'name': 'support.function.string.sql'
+  }
+  {
+    'match': '(?i)\\b(ROW_NUMBER|RANK|DENSE_RANK|PERCENT_RANK|CUME_DIST|NTILE|LAG|LEAD|FIRST_VALUE|LAST_VALUE|NTH_VALUE|OVER)\\b'
+    'name': 'support.function.window.sql'
   }
   {
     'captures':

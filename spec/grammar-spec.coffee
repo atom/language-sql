@@ -55,6 +55,18 @@ describe "SQL grammar", ->
     {tokens} = grammar.tokenizeLine('WITH field')
     expect(tokens[0]).toEqual value: 'WITH', scopes: ['source.sql', 'keyword.other.DML.sql']
 
+  it 'tokenizes scalar functions', ->
+    {tokens} = grammar.tokenizeLine('SELECT CURRENT_DATE')
+    expect(tokens[2]).toEqual value: 'CURRENT_DATE', scopes: ['source.sql', 'support.function.scalar.sql']
+
+  it 'tokenizes math functions', ->
+    {tokens} = grammar.tokenizeLine('SELECT ABS(-4)')
+    expect(tokens[2]).toEqual value: 'ABS', scopes: ['source.sql', 'support.function.math.sql']
+
+  it 'tokenizes window functions', ->
+    {tokens} = grammar.tokenizeLine('SELECT ROW_NUMBER()')
+    expect(tokens[2]).toEqual value: 'ROW_NUMBER', scopes: ['source.sql', 'support.function.window.sql']
+
   it "quotes strings", ->
     {tokens} = grammar.tokenizeLine('"Test"')
     expect(tokens[0]).toEqual value: '"', scopes: ['source.sql', 'string.quoted.double.sql', 'punctuation.definition.string.begin.sql']
