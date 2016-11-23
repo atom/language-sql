@@ -22,7 +22,7 @@
         'name': 'keyword.other.DML.sql'
       '6':
         'name': 'entity.name.function.sql'
-    'match': '(?i:^\\s*(create(?:\\s+or\\s+replace)?)\\s+(aggregate|conversion|database|domain|function|group|(unique\\s+)?index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+(if\\s+(?:not\\s+)?exists\\s+)?)(?:([\'"`]?)(\\w+)\\5)?'
+    'match': '(?i:^\\s*(create(?:\\s+or\\s+replace)?)\\s+(aggregate|conversion|database|domain|function|group|(unique\\s+)?index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)(\\s+if\\s+(?:not\\s+)?exists)?)(?:\\s+([\'"`]?)(\\w+)\\5)?'
     'name': 'meta.create.sql'
   }
   {
@@ -35,7 +35,7 @@
         'name': 'keyword.other.DML.sql'
       '5':
         'name': 'entity.name.function.sql'
-    'match': '(?i:^\\s*(drop)\\s+(aggregate|check|constraint|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+(if\\s+(?:not\\s+)?exists\\s+)?)(?:([\'"`]?)(\\w+)\\4)?'
+    'match': '(?i:^\\s*(drop)\\s+(aggregate|check|constraint|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)(\\s+if\\s+(?:not\\s+)?exists)?)(?:\\s+([\'"`]?)(\\w+)\\4)?'
     'name': 'meta.drop.sql'
   }
   {
