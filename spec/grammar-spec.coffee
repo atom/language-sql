@@ -51,11 +51,11 @@ describe "SQL grammar", ->
     {tokens} = grammar.tokenizeLine('CREATE TABLE')
     expect(tokens[0]).toEqual value: 'CREATE', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.create.sql']
 
-  it 'tokenizes create if exists', ->
-    {tokens} = grammar.tokenizeLine('CREATE TABLE IF EXISTS t1')
+  it 'tokenizes create if not exists', ->
+    {tokens} = grammar.tokenizeLine('CREATE TABLE IF NOT EXISTS t1')
     expect(tokens[0]).toEqual value: 'CREATE', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.create.sql']
     expect(tokens[2]).toEqual value: 'TABLE', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.sql' ]
-    expect(tokens[4]).toEqual value: 'IF EXISTS', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.DML.sql' ]
+    expect(tokens[4]).toEqual value: 'IF NOT EXISTS', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.DML.sql' ]
     expect(tokens[6]).toEqual value: 't1', scopes: ['source.sql', 'meta.create.sql', 'entity.name.function.sql' ]
 
   it 'tokenizes drop', ->
