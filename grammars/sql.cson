@@ -132,7 +132,7 @@
             '''
   }
   {
-    'match': '(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|check|constraint|unique)\\b)'
+    'match': '(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|check|constraint|unique|default)\\b)'
     'name': 'storage.modifier.sql'
   }
   {
