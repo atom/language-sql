@@ -20,36 +20,22 @@
         'name': 'keyword.other.sql'
       '4':
         'name': 'keyword.other.DML.sql'
-      '5':
-        'name': 'keyword.other.DML.sql'
       '6':
-        'name': 'keyword.other.DML.sql'
-      '7':
-        'name': 'punctuation.definition.string.begin.sql'
-      '8':
         'name': 'entity.name.function.sql'
-      '9':
-        'name': 'punctuation.definition.string.end.sql'
-    'match': '(?i:^\\s*(create(?:\\s+or\\s+replace)?)\\s+(aggregate|conversion|database|domain|function|group|(unique\\s+)?index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)(?:\\s+(if)\\s+(not)\\s+(exists))?)(?:\\s+([\'"`]?)(\\w+)\\7)?'
+    'match': '(?i:^\\s*(create(?:\\s+or\\s+replace)?)\\s+(aggregate|conversion|database|domain|function|group|(unique\\s+)?index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)(?:\\s+(if\\s+not\\s+exists))?)(?:\\s+([\'"`]?)(\\w+)\\5)?'
     'name': 'meta.create.sql'
   }
   {
     'captures':
       '1':
-        'name': 'keyword.other.drop.sql'
+        'name': 'keyword.other.create.sql'
       '2':
         'name': 'keyword.other.sql'
       '3':
         'name': 'keyword.other.DML.sql'
-      '4':
-        'name': 'keyword.other.DML.sql'
       '5':
-        'name': 'punctuation.definition.string.begin.sql'
-      '6':
         'name': 'entity.name.function.sql'
-      '7':
-        'name': 'punctuation.definition.string.end.sql'
-    'match': '(?i:^\\s*(drop)\\s+(aggregate|check|constraint|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)(?:\\s+(if)\\s+(exists))?)(?:\\s+([\'"`]?)(\\w+)(\\5))?'
+    'match': '(?i:^\\s*(drop)\\s+(aggregate|check|constraint|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)(?:\\s+(if\\s+exists))?)(?:\\s+([\'"`]?)(\\w+)\\4)?'
     'name': 'meta.drop.sql'
   }
   {
