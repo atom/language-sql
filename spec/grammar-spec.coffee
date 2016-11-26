@@ -55,22 +55,19 @@ describe "SQL grammar", ->
     {tokens} = grammar.tokenizeLine('CREATE TABLE IF NOT EXISTS t1')
     expect(tokens[0]).toEqual value: 'CREATE', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.create.sql']
     expect(tokens[2]).toEqual value: 'TABLE', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.sql' ]
-    expect(tokens[4]).toEqual value: 'IF', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.DML.sql' ]
-    expect(tokens[6]).toEqual value: 'NOT', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.DML.sql' ]
-    expect(tokens[8]).toEqual value: 'EXISTS', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.DML.sql' ]
-    expect(tokens[10]).toEqual value: 't1', scopes: ['source.sql', 'meta.create.sql', 'entity.name.function.sql' ]
+    expect(tokens[4]).toEqual value: 'IF NOT EXISTS', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.DML.sql' ]
+    expect(tokens[6]).toEqual value: 't1', scopes: ['source.sql', 'meta.create.sql', 'entity.name.function.sql' ]
 
   it 'tokenizes drop', ->
     {tokens} = grammar.tokenizeLine('DROP CONSTRAINT')
-    expect(tokens[0]).toEqual value: 'DROP', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.drop.sql']
+    expect(tokens[0]).toEqual value: 'DROP', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.create.sql']
 
   it 'tokenizes drop if exists', ->
     {tokens} = grammar.tokenizeLine('DROP TABLE IF EXISTS t1')
-    expect(tokens[0]).toEqual value: 'DROP', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.drop.sql']
+    expect(tokens[0]).toEqual value: 'DROP', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.create.sql']
     expect(tokens[2]).toEqual value: 'TABLE', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.sql' ]
-    expect(tokens[4]).toEqual value: 'IF', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.DML.sql' ]
-    expect(tokens[6]).toEqual value: 'EXISTS', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.DML.sql' ]
-    expect(tokens[8]).toEqual value: 't1', scopes: ['source.sql', 'meta.drop.sql', 'entity.name.function.sql' ]
+    expect(tokens[4]).toEqual value: 'IF EXISTS', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.DML.sql' ]
+    expect(tokens[6]).toEqual value: 't1', scopes: ['source.sql', 'meta.drop.sql', 'entity.name.function.sql' ]
 
   it 'tokenizes with', ->
     {tokens} = grammar.tokenizeLine('WITH field')
