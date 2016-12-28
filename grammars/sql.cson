@@ -128,7 +128,7 @@
               |\\b(times)(?:\\((\\d+)\\))(\\swithoutstimeszone\\b)?
 
               # special case, captures 12, 13, 14i, 15
-              |\\b(timestamp|time)\\b(?:(s)\\((\\d+)\\)(\\swithoutstimeszone\\b)?)?
+              |\\b(timestamp(tz)?|time)\\b(?:(s)\\((\\d+)\\)(\\swithoutstimeszone\\b)?)?
             '''
   }
   {
