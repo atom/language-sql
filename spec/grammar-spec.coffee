@@ -51,6 +51,10 @@ describe "SQL grammar", ->
     {tokens} = grammar.tokenizeLine('CREATE TABLE')
     expect(tokens[0]).toEqual value: 'CREATE', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.create.sql']
 
+  it 'does not tokenize create for non-SQL keywords', ->
+    {tokens} = grammar.tokenizeLine('CREATE TABLEOHNO')
+    expect(tokens[0]).toEqual value: 'CREATE TABLEOHNO', scopes: ['source.sql']
+
   it 'tokenizes create if not exists', ->
     {tokens} = grammar.tokenizeLine('CREATE TABLE IF NOT EXISTS t1')
     expect(tokens[0]).toEqual value: 'CREATE', scopes: ['source.sql', 'meta.create.sql', 'keyword.other.create.sql']
@@ -61,6 +65,10 @@ describe "SQL grammar", ->
   it 'tokenizes drop', ->
     {tokens} = grammar.tokenizeLine('DROP CONSTRAINT')
     expect(tokens[0]).toEqual value: 'DROP', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.drop.sql']
+
+  it 'does not tokenize drop for non-SQL keywords', ->
+    {tokens} = grammar.tokenizeLine('DROP CONSTRAINTOHNO')
+    expect(tokens[0]).toEqual value: 'DROP CONSTRAINTOHNO', scopes: ['source.sql']
 
   it 'tokenizes drop if exists', ->
     {tokens} = grammar.tokenizeLine('DROP TABLE IF EXISTS t1')
