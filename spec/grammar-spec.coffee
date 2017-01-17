@@ -60,11 +60,11 @@ describe "SQL grammar", ->
 
   it 'tokenizes drop', ->
     {tokens} = grammar.tokenizeLine('DROP CONSTRAINT')
-    expect(tokens[0]).toEqual value: 'DROP', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.create.sql']
+    expect(tokens[0]).toEqual value: 'DROP', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.drop.sql']
 
   it 'tokenizes drop if exists', ->
     {tokens} = grammar.tokenizeLine('DROP TABLE IF EXISTS t1')
-    expect(tokens[0]).toEqual value: 'DROP', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.create.sql']
+    expect(tokens[0]).toEqual value: 'DROP', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.drop.sql']
     expect(tokens[2]).toEqual value: 'TABLE', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.sql' ]
     expect(tokens[4]).toEqual value: 'IF EXISTS', scopes: ['source.sql', 'meta.drop.sql', 'keyword.other.DML.sql' ]
     expect(tokens[6]).toEqual value: 't1', scopes: ['source.sql', 'meta.drop.sql', 'entity.name.function.sql' ]

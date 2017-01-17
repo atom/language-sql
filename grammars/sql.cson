@@ -28,7 +28,7 @@
   {
     'captures':
       '1':
-        'name': 'keyword.other.create.sql'
+        'name': 'keyword.other.drop.sql'
       '2':
         'name': 'keyword.other.sql'
       '3':
@@ -50,7 +50,7 @@
   {
     'captures':
       '1':
-        'name': 'keyword.other.create.sql'
+        'name': 'keyword.other.drop.sql'
       '2':
         'name': 'keyword.other.table.sql'
       '3':
