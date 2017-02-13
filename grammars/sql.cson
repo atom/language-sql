@@ -6,6 +6,7 @@
   'dsql'
   'pgsql'
   'psql'
+  'mysql'
   'sql'
 ]
 'patterns': [
