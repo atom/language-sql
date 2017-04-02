@@ -102,3 +102,32 @@ describe "SQL grammar", ->
     expect(tokens[0]).toEqual value: '"', scopes: ['source.sql', 'string.quoted.double.sql', 'punctuation.definition.string.begin.sql']
     expect(tokens[1]).toEqual value: 'Test', scopes: ['source.sql', 'string.quoted.double.sql']
     expect(tokens[2]).toEqual value: '"', scopes: ['source.sql', 'string.quoted.double.sql', 'punctuation.definition.string.end.sql']
+
+  it 'tokenizes time types', ->
+    {tokens} = grammar.tokenizeLine('TIME')
+    expect(tokens[0]).toEqual value: 'TIME', scopes: ['source.sql', 'storage.type.sql']
+
+    {tokens} = grammar.tokenizeLine('TIME(1)WITHOUT TIME ZONE\'23:00\'')
+    expect(tokens[0]).toEqual value: 'TIME', scopes: ['source.sql', 'storage.type.sql']
+    expect(tokens[2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(tokens[4]).toEqual value: 'WITHOUT TIME ZONE', scopes: ['source.sql', 'storage.type.sql']
+
+    {tokens} = grammar.tokenizeLine('TIMESTAMP ( 12 )  WITH TIME ZONE')
+    expect(tokens[0]).toEqual value: 'TIMESTAMP', scopes: ['source.sql', 'storage.type.sql']
+    expect(tokens[2]).toEqual value: '12', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(tokens[4]).toEqual value: 'WITH TIME ZONE', scopes: ['source.sql', 'storage.type.sql']
+
+    {tokens} = grammar.tokenizeLine('TIME WITH TIME ZONE')
+    expect(tokens[0]).toEqual value: 'TIME', scopes: ['source.sql', 'storage.type.sql']
+    expect(tokens[2]).toEqual value: 'WITH TIME ZONE', scopes: ['source.sql', 'storage.type.sql']
+
+    {tokens} = grammar.tokenizeLine('timetz (2)')
+    expect(tokens[0]).toEqual value: 'timetz', scopes: ['source.sql', 'storage.type.sql']
+    expect(tokens[2]).toEqual value: '2', scopes: ['source.sql', 'constant.numeric.sql']
+
+    {tokens} = grammar.tokenizeLine('timestamptz')
+    expect(tokens[0]).toEqual value: 'timestamptz', scopes: ['source.sql', 'storage.type.sql']
+
+    {tokens} = grammar.tokenizeLine('TIMESTAMPTZ(2)NOT NULL')
+    expect(tokens[0]).toEqual value: 'TIMESTAMPTZ', scopes: ['source.sql', 'storage.type.sql']
+    expect(tokens[2]).toEqual value: '2', scopes: ['source.sql', 'constant.numeric.sql']
