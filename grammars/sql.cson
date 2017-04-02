@@ -112,11 +112,7 @@
       '12':
         'name': 'storage.type.sql'
       '13':
-        'name': 'storage.type.sql'
-      '14':
         'name': 'constant.numeric.sql'
-      '15':
-        'name': 'storage.type.sql'
     'match': '''
               (?xi)
               # normal stuff, capture 1
@@ -132,10 +128,10 @@
               |\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?
 
               # special case, captures 9, 10i, 11
-              |\\b(times)(?:\\((\\d+)\\))(\\swithoutstimeszone\\b)?
+              |\\b(time(?:stamp)?)\\b\\s*(?:\\(\\s*(\\d+)\\s*\\))?\\s*(with(?:out)?\\s+time\\s+zone\\b)?
 
-              # special case, captures 12, 13, 14i, 15
-              |\\b(timestamp(tz)?|time)\\b(?:(s)\\((\\d+)\\)(\\swithoutstimeszone\\b)?)?
+              # special case, captures 12, 13i
+              |\\b(time(?:stamp)?tz)\\b\\s*(?:\\(\\s*(\\d+)\\)\\s*)?
             '''
   }
   {
