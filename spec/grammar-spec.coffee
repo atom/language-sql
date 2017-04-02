@@ -128,6 +128,10 @@ describe "SQL grammar", ->
     {tokens} = grammar.tokenizeLine('timestamptz')
     expect(tokens[0]).toEqual value: 'timestamptz', scopes: ['source.sql', 'storage.type.sql']
 
+    {tokens} = grammar.tokenizeLine('timetz (\'01:59\' || \' UTC+3\')')
+    expect(tokens[0]).toEqual value: 'timetz', scopes: ['source.sql', 'storage.type.sql']
+    expect(tokens[1]).toEqual value: ' (', scopes: ['source.sql']
+
     {tokens} = grammar.tokenizeLine('TIMESTAMPTZ(2)NOT NULL')
     expect(tokens[0]).toEqual value: 'TIMESTAMPTZ', scopes: ['source.sql', 'storage.type.sql']
     expect(tokens[2]).toEqual value: '2', scopes: ['source.sql', 'constant.numeric.sql']
