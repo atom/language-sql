@@ -124,7 +124,7 @@
               |\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?
 
               # special case, captures 9, 10i, 11
-              |\\b(time(?:stamp)?)\\b\\s*(?:\\(\\s*(\\d+)\\s*\\))?\\s*(with(?:out)?\\s+time\\s+zone\\b)?
+              |\\b(time(?:stamp)?)\\b(?:\\s*\\(\\s*(\\d+)\\s*\\))?\\s*(with(?:out)?\\s+time\\s+zone\\b)?
             '''
   }
   {
