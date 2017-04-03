@@ -109,14 +109,6 @@
         'name': 'constant.numeric.sql'
       '11':
         'name': 'storage.type.sql'
-      '12':
-        'name': 'storage.type.sql'
-      '13':
-        'name': 'storage.type.sql'
-      '14':
-        'name': 'constant.numeric.sql'
-      '15':
-        'name': 'storage.type.sql'
     'match': '''
               (?xi)
               # normal stuff, capture 1
@@ -126,16 +118,13 @@
               |\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)
 
               # optional numeric suffix, capture 4 + 5i
-              |\\b(char|number|n?varchar\\d?)\\b(?:\\((\\d+)\\))?
+              |\\b(char|number|n?varchar\\d?|time(?:stamp)?tz)\\b(?:\\s*\\(\\s*(\\d+)\\s*\\))?
 
               # special case, capture 6 + 7i + 8i
               |\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?
 
               # special case, captures 9, 10i, 11
-              |\\b(times)(?:\\((\\d+)\\))(\\swithoutstimeszone\\b)?
-
-              # special case, captures 12, 13, 14i, 15
-              |\\b(timestamp(tz)?|time)\\b(?:(s)\\((\\d+)\\)(\\swithoutstimeszone\\b)?)?
+              |\\b(time(?:stamp)?)\\b(?:\\s*\\(\\s*(\\d+)\\s*\\))?(?:\\s*(with(?:out)?\\s+time\\s+zone\\b))?
             '''
   }
   {
