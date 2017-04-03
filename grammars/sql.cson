@@ -118,13 +118,13 @@
               |\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)
 
               # optional numeric suffix, capture 4 + 5i
-              |\\b(char|number|n?varchar\\d?|time(?:stamp)?tz)\\b(?:\\s*\\(\\s*(\\d+)\\)\\s*)?
+              |\\b(char|number|n?varchar\\d?|time(?:stamp)?tz)\\b(?:\\s*\\(\\s*(\\d+)\\s*\\)\\s*)?
 
               # special case, capture 6 + 7i + 8i
               |\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?
 
               # special case, captures 9, 10i, 11
-              |\\b(time(?:stamp)?)\\b(?:\\s*\\(\\s*(\\d+)\\s*\\))?\\s*(with(?:out)?\\s+time\\s+zone\\b)?
+              |\\b(time(?:stamp)?)\\b(?:\\s*\\(\\s*(\\d+)\\s*\\))?(?:\\s*(with(?:out)?\\s+time\\s+zone\\b))?
             '''
   }
   {
