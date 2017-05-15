@@ -4,6 +4,7 @@
   'ddl'
   'dml'
   'dsql'
+  'hql'
   'pgsql'
   'psql'
   'q'
