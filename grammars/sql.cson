@@ -4,11 +4,11 @@
   'ddl'
   'dml'
   'dsql'
+  'hql'
   'pgsql'
   'psql'
   'q'
   'sql'
-  'hql'
 ]
 'patterns': [
   {
