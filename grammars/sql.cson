@@ -12,9 +12,6 @@
 ]
 'patterns': [
   {
-    'include': '#comments'
-  }
-  {
     'captures':
       '1':
         'name': 'keyword.other.create.sql'
@@ -309,7 +306,7 @@
     'captures':
       '1':
         'name': 'punctuation.definition.string.end.sql'
-    'match': '(#\\{)([^\\}]*)(\\})'
+    'match': '(\\{)([^\\}]*)(\\})'
     'name': 'string.interpolated.sql'
   'strings':
     'patterns': [
@@ -372,7 +369,7 @@
           '2':
             'name': 'punctuation.definition.string.end.sql'
         'comment': 'this is faster than the next begin/end rule since sub-pattern will match till end-of-line and SQL files tend to have very long lines.'
-        'match': '(")[^"#]*(")'
+        'match': '(")[^"]*(")'
         'name': 'string.quoted.double.sql'
       }
       {
