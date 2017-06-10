@@ -134,3 +134,13 @@ describe "SQL grammar", ->
     {tokens} = grammar.tokenizeLine('timetz (2)')
     expect(tokens[0]).toEqual value: 'timetz', scopes: ['source.sql', 'storage.type.sql']
     expect(tokens[2]).toEqual value: '2', scopes: ['source.sql', 'constant.numeric.sql']
+
+  it 'tokenizes comments', ->
+    {tokens} = grammar.tokenizeLine('-- comment')
+    expect(tokens[0]).toEqual value: '--', scopes: ['source.sql', 'comment.line.double-dash.sql', 'punctuation.definition.comment.sql']
+    expect(tokens[1]).toEqual value: ' comment', scopes: ['source.sql', 'comment.line.double-dash.sql']
+
+    {tokens} = grammar.tokenizeLine('/* comment */')
+    expect(tokens[0]).toEqual value: '/*', scopes: ['source.sql', 'comment.block.sql', 'punctuation.definition.comment.sql']
+    expect(tokens[1]).toEqual value: ' comment ', scopes: ['source.sql', 'comment.block.sql']
+    expect(tokens[2]).toEqual value: '*/', scopes: ['source.sql', 'comment.block.sql', 'punctuation.definition.comment.sql']
