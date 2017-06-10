@@ -237,29 +237,23 @@
   'comments':
     'patterns': [
       {
-        'begin': '(^[ \\t]+)?(?=--)'
+        'begin': '--'
         'beginCaptures':
-          '1':
-            'name': 'punctuation.whitespace.comment.leading.sql'
-        'end': '(?!\\G)'
-        'patterns': [
-          {
-            'begin': '--'
-            'beginCaptures':
-              '0':
-                'name': 'punctuation.definition.comment.sql'
-            'end': '\\n'
-            'name': 'comment.line.double-dash.sql'
-          }
-        ]
+          '0':
+            'name': 'punctuation.definition.comment.sql'
+        'end': '$'
+        'name': 'comment.line.double-dash.sql'
       }
       {
         'begin': '/\\*'
-        'captures':
+        'beginCaptures':
           '0':
             'name': 'punctuation.definition.comment.sql'
         'end': '\\*/'
-        'name': 'comment.block.c'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.sql'
+        'name': 'comment.block.sql'
       }
     ]
   'regexps':

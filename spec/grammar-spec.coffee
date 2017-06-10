@@ -134,3 +134,26 @@ describe "SQL grammar", ->
     {tokens} = grammar.tokenizeLine('timetz (2)')
     expect(tokens[0]).toEqual value: 'timetz', scopes: ['source.sql', 'storage.type.sql']
     expect(tokens[2]).toEqual value: '2', scopes: ['source.sql', 'constant.numeric.sql']
+
+  it 'tokenizes comments', ->
+    {tokens} = grammar.tokenizeLine('-- comment')
+    expect(tokens[0]).toEqual value: '--', scopes: ['source.sql', 'comment.line.double-dash.sql', 'punctuation.definition.comment.sql']
+    expect(tokens[1]).toEqual value: ' comment', scopes: ['source.sql', 'comment.line.double-dash.sql']
+
+    {tokens} = grammar.tokenizeLine('AND -- WITH')
+
+    expect(tokens[0]).toEqual value: 'AND', scopes: ['source.sql', 'keyword.other.DML.sql']
+    expect(tokens[2]).toEqual value: '--', scopes: ['source.sql', 'comment.line.double-dash.sql', 'punctuation.definition.comment.sql']
+    expect(tokens[3]).toEqual value: ' WITH', scopes: ['source.sql', 'comment.line.double-dash.sql']
+
+    {tokens} = grammar.tokenizeLine('/* comment */')
+    expect(tokens[0]).toEqual value: '/*', scopes: ['source.sql', 'comment.block.sql', 'punctuation.definition.comment.sql']
+    expect(tokens[1]).toEqual value: ' comment ', scopes: ['source.sql', 'comment.block.sql']
+    expect(tokens[2]).toEqual value: '*/', scopes: ['source.sql', 'comment.block.sql', 'punctuation.definition.comment.sql']
+
+    {tokens} = grammar.tokenizeLine('SELECT /* WITH */ AND')
+    expect(tokens[0]).toEqual value: 'SELECT', scopes: ['source.sql', 'keyword.other.DML.sql']
+    expect(tokens[2]).toEqual value: '/*', scopes: ['source.sql', 'comment.block.sql', 'punctuation.definition.comment.sql']
+    expect(tokens[3]).toEqual value: ' WITH ', scopes: ['source.sql', 'comment.block.sql']
+    expect(tokens[4]).toEqual value: '*/', scopes: ['source.sql', 'comment.block.sql', 'punctuation.definition.comment.sql']
+    expect(tokens[6]).toEqual value: 'AND', scopes: ['source.sql', 'keyword.other.DML.sql']
