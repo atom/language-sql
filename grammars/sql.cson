@@ -181,6 +181,10 @@
     'name': 'keyword.other.case.sql'
   }
   {
+    'match': '(?i)\\b(coalesce|nvl|nullif)\\b'
+    'name': 'keyword.other.conditional.sql'
+  }
+  {
     'match': '\\*'
     'name': 'keyword.operator.star.sql'
   }
