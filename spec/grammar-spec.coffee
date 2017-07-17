@@ -83,13 +83,13 @@ describe "SQL grammar", ->
 
   it 'tokenizes conditional expressions', ->
     {tokens} = grammar.tokenizeLine('COALESCE(a,b)')
-    expect(tokens[0]).toEqual value: 'COALESCE', scopes: ['source.sql', 'keyword.other.conditional_expression.sql']
+    expect(tokens[0]).toEqual value: 'COALESCE', scopes: ['source.sql', 'keyword.other.conditional.sql']
 
     {tokens} = grammar.tokenizeLine('NVL(a,b)')
-    expect(tokens[0]).toEqual value: 'NVL', scopes: ['source.sql', 'keyword.other.conditional_expression.sql']
+    expect(tokens[0]).toEqual value: 'NVL', scopes: ['source.sql', 'keyword.other.conditional.sql']
 
     {tokens} = grammar.tokenizeLine('NULLIF(a,b)')
-    expect(tokens[0]).toEqual value: 'NULLIF', scopes: ['source.sql', 'keyword.other.conditional_expression.sql']
+    expect(tokens[0]).toEqual value: 'NULLIF', scopes: ['source.sql', 'keyword.other.conditional.sql']
 
   it 'tokenizes unique', ->
     {tokens} = grammar.tokenizeLine('UNIQUE(id)')

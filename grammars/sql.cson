@@ -182,7 +182,7 @@
   }
   {
     'match': '(?i)\\b(coalesce|nvl|nullif)\\b'
-    'name': 'keyword.other.conditional_expression.sql'
+    'name': 'keyword.other.conditional.sql'
   }
   {
     'match': '\\*'
