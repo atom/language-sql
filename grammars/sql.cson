@@ -113,7 +113,7 @@
     'match': '''
               (?xi)
               # normal stuff, capture 1
-              \\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|datetime|datetime2|double\\sprecision|enum|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|float|serial|smallint|sysdate|text)\\b
+              \\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|datetime|datetime2|double\\sprecision|enum|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|float|serial|smallint|sysdate|text|uniqueidentifier)\\b
 
               # numeric suffix, capture 2 + 3i
               |\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)
