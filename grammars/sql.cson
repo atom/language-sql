@@ -227,14 +227,19 @@
       '1':
         'name': 'constant.other.database-name.sql'
       '2':
+        'name': 'punctuation.separator.period.sql'
+      '3':
         'name': 'constant.other.table-name.sql'
-    'match': '(\\w+?)\\.(\\w+)'
+    'match': '(\\w+?)(\\.)(\\w+)'
   }
   {
     'include': '#strings'
   }
   {
     'include': '#regexps'
+  }
+  {
+    'include': '#punctuation'
   }
 ]
 'repository':
@@ -258,6 +263,40 @@
           '0':
             'name': 'punctuation.definition.comment.sql'
         'name': 'comment.block.sql'
+      }
+    ]
+  'punctuation':
+    'patterns': [
+      {
+        'begin': '\\('
+        'end': '\\)'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.section.bracket.round.begin.sql'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.section.bracket.round.end.sql'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+      {
+        'match': '\\)'
+        'name': 'punctuation.unmatched.bracket.round.end.sql'
+      }
+      {
+        'match': ','
+        'name': 'punctuation.separator.comma.sql'
+      }
+      {
+        'match': '\\.'
+        'name': 'punctuation.separator.period.sql'
+      }
+      {
+        'match': ';'
+        'name': 'punctuation.terminator.statement.semicolon.sql'
       }
     ]
   'regexps':

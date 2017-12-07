@@ -167,3 +167,39 @@ describe "SQL grammar", ->
     expect(tokens[3]).toEqual value: ' WITH ', scopes: ['source.sql', 'comment.block.sql']
     expect(tokens[4]).toEqual value: '*/', scopes: ['source.sql', 'comment.block.sql', 'punctuation.definition.comment.sql']
     expect(tokens[6]).toEqual value: 'AND', scopes: ['source.sql', 'keyword.other.DML.sql']
+
+  it 'tokenizes ()', ->
+    {tokens} = grammar.tokenizeLine('WHERE salary > (SELECT avg(salary) FROM employees)')
+    expect(tokens[0]).toEqual value: 'WHERE', scopes: ['source.sql', 'keyword.other.DML.sql']
+    expect(tokens[1]).toEqual value: ' salary ', scopes: ['source.sql']
+    expect(tokens[2]).toEqual value: '>', scopes: ['source.sql', 'keyword.operator.comparison.sql']
+    expect(tokens[4]).toEqual value: '(', scopes: ['source.sql', 'punctuation.section.bracket.round.begin.sql']
+    expect(tokens[5]).toEqual value: 'SELECT', scopes: ['source.sql', 'keyword.other.DML.sql']
+    expect(tokens[7]).toEqual value: 'avg', scopes: ['source.sql', 'support.function.aggregate.sql']
+    expect(tokens[8]).toEqual value: '(', scopes: ['source.sql', 'punctuation.section.bracket.round.begin.sql']
+    expect(tokens[9]).toEqual value: 'salary', scopes: ['source.sql']
+    expect(tokens[10]).toEqual value: ')', scopes: ['source.sql', 'punctuation.section.bracket.round.end.sql']
+    expect(tokens[12]).toEqual value: 'FROM', scopes: ['source.sql', 'keyword.other.DML.sql']
+    expect(tokens[13]).toEqual value: ' employees', scopes: ['source.sql']
+    expect(tokens[14]).toEqual value: ')', scopes: ['source.sql', 'punctuation.section.bracket.round.end.sql']
+
+  it 'tokenizes ,', ->
+    {tokens} = grammar.tokenizeLine('name, year')
+    expect(tokens[0]).toEqual value: 'name', scopes: ['source.sql']
+    expect(tokens[1]).toEqual value: ',', scopes: ['source.sql', 'punctuation.separator.comma.sql']
+    expect(tokens[2]).toEqual value: ' year', scopes: ['source.sql']
+
+  it 'tokenizes .', ->
+    {tokens} = grammar.tokenizeLine('.')
+    expect(tokens[0]).toEqual value: '.', scopes: ['source.sql', 'punctuation.separator.period.sql']
+
+    {tokens} = grammar.tokenizeLine('database.table')
+    expect(tokens[0]).toEqual value: 'database', scopes: ['source.sql', 'constant.other.database-name.sql']
+    expect(tokens[1]).toEqual value: '.', scopes: ['source.sql', 'punctuation.separator.period.sql']
+    expect(tokens[2]).toEqual value: 'table', scopes: ['source.sql', 'constant.other.table-name.sql']
+
+  it 'tokenizes ;', ->
+    {tokens} = grammar.tokenizeLine('ORDER BY year;')
+    expect(tokens[0]).toEqual value: 'ORDER BY', scopes: ['source.sql', 'keyword.other.DML.sql']
+    expect(tokens[1]).toEqual value: ' year', scopes: ['source.sql']
+    expect(tokens[2]).toEqual value: ';', scopes: ['source.sql', 'punctuation.terminator.statement.semicolon.sql']
