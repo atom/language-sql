@@ -272,10 +272,10 @@
         'end': '\\)'
         'beginCaptures':
           '0':
-            'name': 'punctuation.section.bracket.round.begin.sql'
+            'name': 'punctuation.definition.section.bracket.round.begin.sql'
         'endCaptures':
           '0':
-            'name': 'punctuation.section.bracket.round.end.sql'
+            'name': 'punctuation.definition.section.bracket.round.end.sql'
         'patterns': [
           {
             'include': '$self'
