@@ -113,37 +113,359 @@ describe "SQL grammar", ->
     expect(tokens[1]).toEqual value: 'Test', scopes: ['source.sql', 'string.quoted.double.sql']
     expect(tokens[2]).toEqual value: '"', scopes: ['source.sql', 'string.quoted.double.sql', 'punctuation.definition.string.end.sql']
 
-  it 'tokenizes the time type', ->
-    {tokens} = grammar.tokenizeLine('TIME')
-    expect(tokens[0]).toEqual value: 'TIME', scopes: ['source.sql', 'storage.type.sql']
+  it 'tokenizes column types', ->
+    lines = grammar.tokenizeLines('''
+    bigserial
+    boolean
+    box
+    bytea
+    cidr
+    circle
+    date
+    datetime
+    datetime2
+    double precision
+    enum
+    inet
+    integer
+    interval
+    line
+    lseg
+    macaddr
+    money
+    oid
+    path
+    point
+    polygon
+    real
+    serial
+    sysdate
+    text
+    uniqueidentifier
 
-    {tokens} = grammar.tokenizeLine('TIME WITH TIME ZONE')
-    expect(tokens[0]).toEqual value: 'TIME', scopes: ['source.sql', 'storage.type.sql']
-    expect(tokens[2]).toEqual value: 'WITH TIME ZONE', scopes: ['source.sql', 'storage.type.sql']
+    bigint
+    bigint()
+    bigint(1)
+    bit
+    bit()
+    bit(1)
+    bit varying
+    bit varying()
+    bit varying(1)
+    char
+    char()
+    char(1)
+    character
+    character()
+    character(1)
+    character varying
+    character varying()
+    character varying(1)
+    float
+    float()
+    float(1)
+    int
+    int()
+    int(1)
+    number
+    number()
+    number(1)
+    smallint
+    smallint()
+    smallint(1)
+    timestamptz
+    timestamptz()
+    timestamptz(1)
+    timetz
+    timetz()
+    timetz(1)
+    tinyint
+    tinyint()
+    tinyint(1)
+    varchar
+    varchar()
+    varchar(1)
+    nvarchar
+    nvarchar()
+    nvarchar(1)
+    nvarchar2
+    nvarchar2()
+    nvarchar2(1)
 
-    {tokens} = grammar.tokenizeLine('TIME(1)WITHOUT TIME ZONE\'23:00\'')
-    expect(tokens[0]).toEqual value: 'TIME', scopes: ['source.sql', 'storage.type.sql']
-    expect(tokens[2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
-    expect(tokens[4]).toEqual value: 'WITHOUT TIME ZONE', scopes: ['source.sql', 'storage.type.sql']
+    numeric
+    numeric()
+    numeric(1)
+    numeric(1,1)
+    decimal
+    decimal()
+    decimal(1)
+    decimal(1,1)
 
-  it 'tokenizes the timestamp type', ->
-    {tokens} = grammar.tokenizeLine('TIMESTAMP ( 12 )  WITH TIME ZONE')
-    expect(tokens[0]).toEqual value: 'TIMESTAMP', scopes: ['source.sql', 'storage.type.sql']
-    expect(tokens[2]).toEqual value: '12', scopes: ['source.sql', 'constant.numeric.sql']
-    expect(tokens[4]).toEqual value: 'WITH TIME ZONE', scopes: ['source.sql', 'storage.type.sql']
+    time
+    time with time zone
+    time without time zone
+    time()
+    time() with time zone
+    time() without time zone
+    time(1)
+    time(1) with time zone
+    time(1) without time zone
+    timestamp
+    timestamp with time zone
+    timestamp without time zone
+    timestamp()
+    timestamp() with time zone
+    timestamp() without time zone
+    timestamp(1)
+    timestamp(1) with time zone
+    timestamp(1) without time zone
+    ''')
+    expect(lines[0][0]).toEqual value: 'bigserial', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[1][0]).toEqual value: 'boolean', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[2][0]).toEqual value: 'box', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[3][0]).toEqual value: 'bytea', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[4][0]).toEqual value: 'cidr', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[5][0]).toEqual value: 'circle', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[6][0]).toEqual value: 'date', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[7][0]).toEqual value: 'datetime', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[8][0]).toEqual value: 'datetime2', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[9][0]).toEqual value: 'double precision', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[10][0]).toEqual value: 'enum', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[11][0]).toEqual value: 'inet', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[12][0]).toEqual value: 'integer', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[13][0]).toEqual value: 'interval', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[14][0]).toEqual value: 'line', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[15][0]).toEqual value: 'lseg', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[16][0]).toEqual value: 'macaddr', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[17][0]).toEqual value: 'money', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[18][0]).toEqual value: 'oid', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[19][0]).toEqual value: 'path', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[20][0]).toEqual value: 'point', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[21][0]).toEqual value: 'polygon', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[22][0]).toEqual value: 'real', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[23][0]).toEqual value: 'serial', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[24][0]).toEqual value: 'sysdate', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[25][0]).toEqual value: 'text', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[26][0]).toEqual value: 'uniqueidentifier', scopes: ['source.sql', 'storage.type.sql']
 
-  it 'tokenizes the timestamptz type', ->
-    {tokens} = grammar.tokenizeLine('timestamptz')
-    expect(tokens[0]).toEqual value: 'timestamptz', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[28][0]).toEqual value: 'bigint', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[29][0]).toEqual value: 'bigint', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[29][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[29][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[30][0]).toEqual value: 'bigint', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[30][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[30][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[30][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[31][0]).toEqual value: 'bit', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[32][0]).toEqual value: 'bit', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[32][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[32][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[33][0]).toEqual value: 'bit', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[33][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[33][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[33][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[34][0]).toEqual value: 'bit varying', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[35][0]).toEqual value: 'bit varying', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[35][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[35][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[36][0]).toEqual value: 'bit varying', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[36][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[36][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[36][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[37][0]).toEqual value: 'char', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[38][0]).toEqual value: 'char', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[38][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[38][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[39][0]).toEqual value: 'char', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[39][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[39][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[39][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[40][0]).toEqual value: 'character', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[41][0]).toEqual value: 'character', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[41][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[41][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[42][0]).toEqual value: 'character', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[42][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[42][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[42][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[43][0]).toEqual value: 'character varying', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[44][0]).toEqual value: 'character varying', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[44][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[44][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[45][0]).toEqual value: 'character varying', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[45][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[45][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[45][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[46][0]).toEqual value: 'float', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[47][0]).toEqual value: 'float', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[47][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[47][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[48][0]).toEqual value: 'float', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[48][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[48][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[48][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[49][0]).toEqual value: 'int', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[50][0]).toEqual value: 'int', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[50][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[50][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[51][0]).toEqual value: 'int', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[51][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[51][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[51][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[52][0]).toEqual value: 'number', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[53][0]).toEqual value: 'number', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[53][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[53][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[54][0]).toEqual value: 'number', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[54][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[54][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[54][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[55][0]).toEqual value: 'smallint', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[56][0]).toEqual value: 'smallint', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[56][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[56][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[57][0]).toEqual value: 'smallint', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[57][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[57][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[57][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[58][0]).toEqual value: 'timestamptz', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[59][0]).toEqual value: 'timestamptz', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[59][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[59][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[60][0]).toEqual value: 'timestamptz', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[60][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[60][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[60][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[61][0]).toEqual value: 'timetz', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[62][0]).toEqual value: 'timetz', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[62][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[62][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[63][0]).toEqual value: 'timetz', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[63][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[63][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[63][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[64][0]).toEqual value: 'tinyint', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[65][0]).toEqual value: 'tinyint', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[65][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[65][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[66][0]).toEqual value: 'tinyint', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[66][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[66][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[66][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[67][0]).toEqual value: 'varchar', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[68][0]).toEqual value: 'varchar', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[68][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[68][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[69][0]).toEqual value: 'varchar', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[69][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[69][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[69][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[70][0]).toEqual value: 'nvarchar', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[71][0]).toEqual value: 'nvarchar', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[71][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[71][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[72][0]).toEqual value: 'nvarchar', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[72][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[72][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[72][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[73][0]).toEqual value: 'nvarchar2', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[74][0]).toEqual value: 'nvarchar2', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[74][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[74][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[75][0]).toEqual value: 'nvarchar2', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[75][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[75][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[75][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
 
-    {tokens} = grammar.tokenizeLine('TIMESTAMPTZ(2)NOT NULL')
-    expect(tokens[0]).toEqual value: 'TIMESTAMPTZ', scopes: ['source.sql', 'storage.type.sql']
-    expect(tokens[2]).toEqual value: '2', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[77][0]).toEqual value: 'numeric', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[78][0]).toEqual value: 'numeric', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[78][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[78][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[79][0]).toEqual value: 'numeric', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[79][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[79][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[79][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[80][0]).toEqual value: 'numeric', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[80][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[80][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[80][3]).toEqual value: ',', scopes: ['source.sql', 'punctuation.separator.parameters.comma.sql']
+    expect(lines[80][4]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[80][5]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[81][0]).toEqual value: 'decimal', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[82][0]).toEqual value: 'decimal', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[82][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[82][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[83][0]).toEqual value: 'decimal', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[83][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[83][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[83][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[84][0]).toEqual value: 'decimal', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[84][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[84][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[84][3]).toEqual value: ',', scopes: ['source.sql', 'punctuation.separator.parameters.comma.sql']
+    expect(lines[84][4]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[84][5]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
 
-  it 'tokenizes the timetz type', ->
-    {tokens} = grammar.tokenizeLine('timetz (2)')
-    expect(tokens[0]).toEqual value: 'timetz', scopes: ['source.sql', 'storage.type.sql']
-    expect(tokens[2]).toEqual value: '2', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[86][0]).toEqual value: 'time', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[87][0]).toEqual value: 'time', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[87][2]).toEqual value: 'with time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[88][0]).toEqual value: 'time', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[88][2]).toEqual value: 'without time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[89][0]).toEqual value: 'time', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[89][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[89][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[90][0]).toEqual value: 'time', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[90][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[90][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[90][4]).toEqual value: 'with time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[91][0]).toEqual value: 'time', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[91][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[91][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[91][4]).toEqual value: 'without time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[92][0]).toEqual value: 'time', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[92][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[92][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[92][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[93][0]).toEqual value: 'time', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[93][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[93][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[93][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[93][5]).toEqual value: 'with time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[94][0]).toEqual value: 'time', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[94][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[94][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[94][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[94][5]).toEqual value: 'without time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[95][0]).toEqual value: 'timestamp', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[96][0]).toEqual value: 'timestamp', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[96][2]).toEqual value: 'with time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[97][0]).toEqual value: 'timestamp', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[97][2]).toEqual value: 'without time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[98][0]).toEqual value: 'timestamp', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[98][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[98][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[99][0]).toEqual value: 'timestamp', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[99][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[99][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[99][4]).toEqual value: 'with time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[100][0]).toEqual value: 'timestamp', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[100][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[100][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[100][4]).toEqual value: 'without time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[101][0]).toEqual value: 'timestamp', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[101][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[101][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[101][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[102][0]).toEqual value: 'timestamp', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[102][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[102][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[102][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[102][5]).toEqual value: 'with time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[103][0]).toEqual value: 'timestamp', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[103][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[103][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[103][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[103][5]).toEqual value: 'without time zone', scopes: ['source.sql', 'storage.type.sql']
 
   it 'tokenizes comments', ->
     {tokens} = grammar.tokenizeLine('-- comment')

@@ -87,49 +87,53 @@
     'name': 'meta.alter.sql'
   }
   {
+    'match': '(?i)\\b(bigserial|boolean|box|bytea|cidr|circle|date|datetime|datetime2|double\\s+precision|enum|inet|integer|interval|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|sysdate|text|uniqueidentifier)\\b'
+    'name': 'storage.type.sql'
+  }
+  {
+    'match': '(?i)\\b(bigint|bit(?:\\s+varying)?|n?char|character(?:\\s+varying)?|float|int|number|smallint|time(?:stamp)?tz|tinyint|n?varchar\\d?)\\b(?:\\s*(\\()\\s*(\\d*)\\s*(\\)))?'
     'captures':
       '1':
         'name': 'storage.type.sql'
       '2':
-        'name': 'storage.type.sql'
+        'name': 'punctuation.definition.parameters.bracket.round.begin.sql'
       '3':
         'name': 'constant.numeric.sql'
       '4':
+        'name': 'punctuation.definition.parameters.bracket.round.end.sql'
+  }
+  {
+    'match': '(?i)\\b(numeric|decimal)\\b(?:\\s*(\\()\\s*(\\d*)(?:\\s*(,)\\s*(\\d*))?\\s*(\\)))?'
+    'captures':
+      '1':
         'name': 'storage.type.sql'
+      '2':
+        'name': 'punctuation.definition.parameters.bracket.round.begin.sql'
+      '3':
+        'name': 'constant.numeric.sql'
+      '4':
+        'name': 'punctuation.separator.parameters.comma.sql'
       '5':
         'name': 'constant.numeric.sql'
       '6':
-        'name': 'storage.type.sql'
-      '7':
-        'name': 'constant.numeric.sql'
-      '8':
-        'name': 'constant.numeric.sql'
-      '9':
-        'name': 'storage.type.sql'
-      '10':
-        'name': 'constant.numeric.sql'
-      '11':
-        'name': 'storage.type.sql'
-    'match': '''
-              (?xi)
-              # normal stuff, capture 1
-              \\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|datetime|datetime2|double\\sprecision|enum|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|float|serial|smallint|tinyint|sysdate|text|uniqueidentifier)\\b
-
-              # numeric suffix, capture 2 + 3i
-              |\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)
-
-              # optional numeric suffix, capture 4 + 5i
-              |\\b(char|number|n?varchar\\d?|time(?:stamp)?tz)\\b(?:\\s*\\(\\s*(\\d+)\\s*\\))?
-
-              # special case, capture 6 + 7i + 8i
-              |\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?
-
-              # special case, captures 9, 10i, 11
-              |\\b(time(?:stamp)?)\\b(?:\\s*\\(\\s*(\\d+)\\s*\\))?(?:\\s*(with(?:out)?\\s+time\\s+zone\\b))?
-            '''
+        'name': 'punctuation.definition.parameters.bracket.round.end.sql'
   }
   {
-    'match': '(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|check|constraint|unique|default)\\b)'
+    'match': '(?i)\\b(time(?:stamp)?)\\b(?:\\s*(\\()\\s*(\\d*)\\s*(\\)))?(?:\\s*(with(?:out)?\\s+time\\s+zone)\\b)?'
+    'captures':
+      '1':
+        'name': 'storage.type.sql'
+      '2':
+        'name': 'punctuation.definition.parameters.bracket.round.begin.sql'
+      '3':
+        'name': 'constant.numeric.sql'
+      '4':
+        'name': 'punctuation.definition.parameters.bracket.round.end.sql'
+      '5':
+        'name': 'storage.type.sql'
+  }
+  {
+    'match': '(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+delete(\\s+cascade)?|check|constraint|unique|default)\\b)'
     'name': 'storage.modifier.sql'
   }
   {
