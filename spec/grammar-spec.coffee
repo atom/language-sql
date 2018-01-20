@@ -113,37 +113,63 @@ describe "SQL grammar", ->
     expect(tokens[1]).toEqual value: 'Test', scopes: ['source.sql', 'string.quoted.double.sql']
     expect(tokens[2]).toEqual value: '"', scopes: ['source.sql', 'string.quoted.double.sql', 'punctuation.definition.string.end.sql']
 
-  it 'tokenizes the time type', ->
-    {tokens} = grammar.tokenizeLine('TIME')
-    expect(tokens[0]).toEqual value: 'TIME', scopes: ['source.sql', 'storage.type.sql']
+  it 'tokenizes storage types', ->
+    lines = grammar.tokenizeLines('''
+    datetime
+    double precision
+    integer
+    ''')
+    expect(lines[0][0]).toEqual value: 'datetime', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[1][0]).toEqual value: 'double precision', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[2][0]).toEqual value: 'integer', scopes: ['source.sql', 'storage.type.sql']
 
-    {tokens} = grammar.tokenizeLine('TIME WITH TIME ZONE')
-    expect(tokens[0]).toEqual value: 'TIME', scopes: ['source.sql', 'storage.type.sql']
-    expect(tokens[2]).toEqual value: 'WITH TIME ZONE', scopes: ['source.sql', 'storage.type.sql']
+  it 'tokenizes storage types with an optional argument', ->
+    lines = grammar.tokenizeLines('''
+    bit varying
+    int()
+    timestamptz(1)
+    ''')
+    expect(lines[0][0]).toEqual value: 'bit varying', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[1][0]).toEqual value: 'int', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[1][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[1][2]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[2][0]).toEqual value: 'timestamptz', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[2][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[2][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[2][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
 
-    {tokens} = grammar.tokenizeLine('TIME(1)WITHOUT TIME ZONE\'23:00\'')
-    expect(tokens[0]).toEqual value: 'TIME', scopes: ['source.sql', 'storage.type.sql']
-    expect(tokens[2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
-    expect(tokens[4]).toEqual value: 'WITHOUT TIME ZONE', scopes: ['source.sql', 'storage.type.sql']
+  it 'tokenizes storage types with two optional arguments', ->
+    lines = grammar.tokenizeLines('''
+    decimal
+    decimal(1)
+    numeric(1,1)
+    ''')
+    expect(lines[0][0]).toEqual value: 'decimal', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[1][0]).toEqual value: 'decimal', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[1][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[1][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[1][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[2][0]).toEqual value: 'numeric', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[2][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[2][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[2][3]).toEqual value: ',', scopes: ['source.sql', 'punctuation.separator.parameters.comma.sql']
+    expect(lines[2][4]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[2][5]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
 
-  it 'tokenizes the timestamp type', ->
-    {tokens} = grammar.tokenizeLine('TIMESTAMP ( 12 )  WITH TIME ZONE')
-    expect(tokens[0]).toEqual value: 'TIMESTAMP', scopes: ['source.sql', 'storage.type.sql']
-    expect(tokens[2]).toEqual value: '12', scopes: ['source.sql', 'constant.numeric.sql']
-    expect(tokens[4]).toEqual value: 'WITH TIME ZONE', scopes: ['source.sql', 'storage.type.sql']
-
-  it 'tokenizes the timestamptz type', ->
-    {tokens} = grammar.tokenizeLine('timestamptz')
-    expect(tokens[0]).toEqual value: 'timestamptz', scopes: ['source.sql', 'storage.type.sql']
-
-    {tokens} = grammar.tokenizeLine('TIMESTAMPTZ(2)NOT NULL')
-    expect(tokens[0]).toEqual value: 'TIMESTAMPTZ', scopes: ['source.sql', 'storage.type.sql']
-    expect(tokens[2]).toEqual value: '2', scopes: ['source.sql', 'constant.numeric.sql']
-
-  it 'tokenizes the timetz type', ->
-    {tokens} = grammar.tokenizeLine('timetz (2)')
-    expect(tokens[0]).toEqual value: 'timetz', scopes: ['source.sql', 'storage.type.sql']
-    expect(tokens[2]).toEqual value: '2', scopes: ['source.sql', 'constant.numeric.sql']
+  it 'tokenizes storage types with time zones', ->
+    lines = grammar.tokenizeLines('''
+    time
+    time(1) with time zone
+    timestamp without time zone
+    ''')
+    expect(lines[0][0]).toEqual value: 'time', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[1][0]).toEqual value: 'time', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[1][1]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.begin.sql']
+    expect(lines[1][2]).toEqual value: '1', scopes: ['source.sql', 'constant.numeric.sql']
+    expect(lines[1][3]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.parameters.bracket.round.end.sql']
+    expect(lines[1][5]).toEqual value: 'with time zone', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[2][0]).toEqual value: 'timestamp', scopes: ['source.sql', 'storage.type.sql']
+    expect(lines[2][2]).toEqual value: 'without time zone', scopes: ['source.sql', 'storage.type.sql']
 
   it 'tokenizes comments', ->
     {tokens} = grammar.tokenizeLine('-- comment')
@@ -167,3 +193,40 @@ describe "SQL grammar", ->
     expect(tokens[3]).toEqual value: ' WITH ', scopes: ['source.sql', 'comment.block.sql']
     expect(tokens[4]).toEqual value: '*/', scopes: ['source.sql', 'comment.block.sql', 'punctuation.definition.comment.sql']
     expect(tokens[6]).toEqual value: 'AND', scopes: ['source.sql', 'keyword.other.DML.sql']
+
+  describe 'punctuation', ->
+    it 'tokenizes parentheses', ->
+      {tokens} = grammar.tokenizeLine('WHERE salary > (SELECT avg(salary) FROM employees)')
+      expect(tokens[0]).toEqual value: 'WHERE', scopes: ['source.sql', 'keyword.other.DML.sql']
+      expect(tokens[1]).toEqual value: ' salary ', scopes: ['source.sql']
+      expect(tokens[2]).toEqual value: '>', scopes: ['source.sql', 'keyword.operator.comparison.sql']
+      expect(tokens[4]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.section.bracket.round.begin.sql']
+      expect(tokens[5]).toEqual value: 'SELECT', scopes: ['source.sql', 'keyword.other.DML.sql']
+      expect(tokens[7]).toEqual value: 'avg', scopes: ['source.sql', 'support.function.aggregate.sql']
+      expect(tokens[8]).toEqual value: '(', scopes: ['source.sql', 'punctuation.definition.section.bracket.round.begin.sql']
+      expect(tokens[9]).toEqual value: 'salary', scopes: ['source.sql']
+      expect(tokens[10]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.section.bracket.round.end.sql']
+      expect(tokens[12]).toEqual value: 'FROM', scopes: ['source.sql', 'keyword.other.DML.sql']
+      expect(tokens[13]).toEqual value: ' employees', scopes: ['source.sql']
+      expect(tokens[14]).toEqual value: ')', scopes: ['source.sql', 'punctuation.definition.section.bracket.round.end.sql']
+
+    it 'tokenizes commas', ->
+      {tokens} = grammar.tokenizeLine('name, year')
+      expect(tokens[0]).toEqual value: 'name', scopes: ['source.sql']
+      expect(tokens[1]).toEqual value: ',', scopes: ['source.sql', 'punctuation.separator.comma.sql']
+      expect(tokens[2]).toEqual value: ' year', scopes: ['source.sql']
+
+    it 'tokenizes periods', ->
+      {tokens} = grammar.tokenizeLine('.')
+      expect(tokens[0]).toEqual value: '.', scopes: ['source.sql', 'punctuation.separator.period.sql']
+
+      {tokens} = grammar.tokenizeLine('database.table')
+      expect(tokens[0]).toEqual value: 'database', scopes: ['source.sql', 'constant.other.database-name.sql']
+      expect(tokens[1]).toEqual value: '.', scopes: ['source.sql', 'punctuation.separator.period.sql']
+      expect(tokens[2]).toEqual value: 'table', scopes: ['source.sql', 'constant.other.table-name.sql']
+
+    it 'tokenizes semicolons', ->
+      {tokens} = grammar.tokenizeLine('ORDER BY year;')
+      expect(tokens[0]).toEqual value: 'ORDER BY', scopes: ['source.sql', 'keyword.other.DML.sql']
+      expect(tokens[1]).toEqual value: ' year', scopes: ['source.sql']
+      expect(tokens[2]).toEqual value: ';', scopes: ['source.sql', 'punctuation.terminator.statement.semicolon.sql']
