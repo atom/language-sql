@@ -448,4 +448,16 @@
           }
         ]
       }
+      {
+        'match': '(?i)\\b(top)\\b\\s*(\\(\\w+\\)|\\w+)\\s*(\\bPERCENT\\b)?\\s*(\\bWITH TIES\\b)?',
+        'captures':
+            '1':
+                'name': 'keyword.sqlserver.sql'
+            '2':
+                'name': 'constant.numeric.sql'
+            '3':
+                'name': 'keyword.sqlserver.sql'
+            '4':
+                'name': 'keyword.sqlserver.sql'
+      }
     ]
