@@ -230,3 +230,24 @@ describe "SQL grammar", ->
       expect(tokens[0]).toEqual value: 'ORDER BY', scopes: ['source.sql', 'keyword.other.DML.sql']
       expect(tokens[1]).toEqual value: ' year', scopes: ['source.sql']
       expect(tokens[2]).toEqual value: ';', scopes: ['source.sql', 'punctuation.terminator.statement.semicolon.sql']
+
+  describe 'top n percent', ->
+    it 'tokenizes top N', ->
+      {tokens} = grammar.tokenizeLine('TOP 10')
+      expect(tokens[0]).toEqual value: 'TOP', scopes: [ 'source.sql', 'keyword.sqlserver.sql' ]
+      expect(tokens[2]).toEqual value: '10', scopes: [ 'source.sql', 'constant.numeric.sql' ]
+    it 'tokenizes top (n)', ->
+      {tokens} = grammar.tokenizeLine('TOP (123)')
+      expect(tokens[0]).toEqual value: 'TOP', scopes: [ 'source.sql', 'keyword.sqlserver.sql' ]
+      expect(tokens[2]).toEqual value: '(123)', scopes: [ 'source.sql', 'constant.numeric.sql' ]
+    it 'tokenizes top (n) percent', ->
+      {tokens} = grammar.tokenizeLine('top (50) PERCENT')
+      expect(tokens[0]).toEqual value: 'top', scopes: [ 'source.sql', 'keyword.sqlserver.sql' ]
+      expect(tokens[2]).toEqual value: '(50)', scopes: [ 'source.sql', 'constant.numeric.sql' ]
+      expect(tokens[4]).toEqual value: 'PERCENT', scopes: [ 'source.sql', 'keyword.sqlserver.sql' ]
+    it 'tokenizes top (n) percent with ties', ->
+      {tokens} = grammar.tokenizeLine('TOP (50) percent WITH ties')
+      expect(tokens[0]).toEqual value: 'TOP', scopes: [ 'source.sql', 'keyword.sqlserver.sql' ]
+      expect(tokens[2]).toEqual value: '(50)', scopes: [ 'source.sql', 'constant.numeric.sql' ]
+      expect(tokens[4]).toEqual value: 'percent', scopes: [ 'source.sql', 'keyword.sqlserver.sql' ]
+      expect(tokens[6]).toEqual value: 'WITH ties', scopes: [ 'source.sql', 'keyword.sqlserver.sql' ]
