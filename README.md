@@ -1,7 +1,5 @@
 # SQL language support in Atom
-[![macOS Build Status](https://travis-ci.org/atom/language-sql.svg?branch=master)](https://travis-ci.org/atom/language-sql)
-[![Windows Build Status](https://ci.appveyor.com/api/projects/status/ji31ouk5ehs4jdu1/branch/master?svg=true)](https://ci.appveyor.com/project/Atom/language-sql/branch/master)
-[![Dependency Status](https://david-dm.org/atom/language-sql.svg)](https://david-dm.org/atom/language-sql)
+[![CI](https://github.com/atom/language-sql/actions/workflows/ci.yml/badge.svg)](https://github.com/atom/language-sql/actions/workflows/ci.yml)
 
 Adds syntax highlighting to SQL files in Atom.
 
